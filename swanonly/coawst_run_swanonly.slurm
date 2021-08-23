@@ -31,7 +31,6 @@
 ## Add appropriate compilers
 module purge
 module load icc_17-ompi_2.0.2
-## module load icc_17-impi_2017
 module load netcdf_fortran+c_4.4.1.1-icc_17
 module list
 
