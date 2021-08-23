@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #
 # svn $Id: build.bash 429 2009-12-20 17:30:26Z jcwarner $
@@ -122,7 +121,7 @@ done
 # Set the CPP option defining the particular application. This will
 # determine the name of the ".h" header file with the application
 # CPP definitions. Also this will activate the switch file for WW3.
-export   COAWST_APPLICATION=dunex
+export   COAWST_APPLICATION=INLET_TEST
 
 # Set the ROMS_APPLICATION to be the same as the COAWST_APP.
 # Do not change this. We use the COAWST APP for other checks.
@@ -130,8 +129,8 @@ export   ROMS_APPLICATION=${COAWST_APPLICATION}
 
 # Set a local environmental variable to define the path to the directories
 # where all this project's files are kept.
-export   MY_ROOT_DIR=/gscratch/derakhti/users/ej/dunex_swan/CODE
-export   MY_PROJECT_DIR=/gscratch/derakhti/users/ej/dunex_swan/RUNFILES/basic
+export   MY_ROOT_DIR=/gscratch/derakhti/src/COAWST
+export   MY_PROJECT_DIR=/gscratch/derakhti/users/ej/dunexCOAWST/swanonly
 
 # The path to the user's local current ROMS source code.
 # If using svn locally, this would be the user's Working Copy Path (WCPATH).
@@ -151,18 +150,19 @@ export   MY_ROMS_SRC=${MY_ROOT_DIR}/
 # Wave Watch 3: Here we provide 5 environment variables for WW3.
 #
 # 1) COAWST_WW3_DIR is a pointer to root WW3 code, do not change.
-#export   COAWST_WW3_DIR=${MY_ROOT_DIR}/WW3/model
+export   COAWST_WW3_DIR=${MY_ROOT_DIR}/WW3/model
 #
 # 2) WWATCH3_NETCDF can be NC3 or NC4. We need NC4 for COAWST. do not change.
-#export   WWATCH3_NETCDF=NC4
+export   WWATCH3_NETCDF=NC4
 #
 # 3) WWATCH_ENV points to WW3 environment listing. do not change.
-#export   WWATCH_ENV=${COAWST_WW3_DIR}/wwatch.env
+export   WWATCH_ENV=${COAWST_WW3_DIR}/wwatch.env
 #
 # 4) NETCDF_CONFIG is needed by WW3. You need to set this:
 #export   NETCDF_CONFIG=${NETCDF_LIBDIR}/../bin/nc-config
 #    This may require nf-config, depending on your system.
-#export   NETCDF_CONFIG=/usr/bin/nc-config
+export   NETCDF_CONFIG=/usr/bin/nf-config
+#export   NETCDF_CONFIG=/vortexfs1/apps/impistack-1.0/bin/nf-config
 #
 # 5) WW3_SWITCH_FILE is like cpp options for WW3. You need to create it and
 #    list the name here.  You need to have COAWST listed in the switch file.
@@ -177,8 +177,7 @@ export   MY_ROMS_SRC=${MY_ROOT_DIR}/
 # ${MY_ROMS_SRC}/Compilers. If this is the case, the you need to keep
 # these configurations files up-to-date.
 
-export         COMPILERS=${MY_ROMS_SRC}/Compilers
-#export 		COMPILERS=/gscratch/derakhti/users/ej/DUNEX_01/CODE/Compilers
+#export         COMPILERS=${MY_ROMS_SRC}/Compilers
 
 # Set tunable CPP options.
 #
@@ -209,8 +208,9 @@ export         COMPILERS=${MY_ROMS_SRC}/Compilers
  export         which_MPI=openmpi       # compile with OpenMPI library
 
 #export        USE_OpenMP=on            # shared-memory parallelism
+
  export              FORT=ifort
-#export               FORT=gfortran
+#export              FORT=gfortran
 #export              FORT=pgi
 
  export         USE_DEBUG=              # use Fortran debugging flags
@@ -218,7 +218,7 @@ export         COMPILERS=${MY_ROMS_SRC}/Compilers
  export       USE_NETCDF4=on            # compile with NetCDF-4 library
 #export   USE_PARALLEL_IO=on            # Parallel I/O with Netcdf-4/HDF5
 
- #export       USE_MY_LIBS=on            # use my library paths below
+#export       USE_MY_LIBS=on            # use my library paths below
 
 # There are several MPI libraries available. Here, we set the desired
 # "mpif90" script to use during compilation. This only works if the make
@@ -240,7 +240,7 @@ if [ -n "${USE_MPIF90:+1}" ]; then
       elif [ "${which_MPI}" = "mpich2" ]; then
         export PATH=/opt/intelsoft/mpich2/bin:$PATH
       elif [ "${which_MPI}" = "openmpi" ]; then
-        export PATH=/sw/openmpi-2.0.2_icc-17/bin:$PATH
+        export PATH=/opt/intelsoft/openmpi/bin:$PATH
       fi
       ;;
 
@@ -258,7 +258,7 @@ if [ -n "${USE_MPIF90:+1}" ]; then
       if [ "${which_MPI}" = "mpich2" ]; then
         export PATH=/opt/gfortransoft/mpich2/bin:$PATH
       elif [ "${which_MPI}" = "openmpi" ]; then
-        export PATH=/sw/netcdf/fortran-4.4.5_gcc_8.2.1_ompi_3.1.4_parallel_hdf5_1.10.5/bin:$PATH
+        export PATH=/opt/gfortransoft/openmpi/bin:$PATH
       fi
       ;;
 
@@ -318,10 +318,10 @@ if [ -n "${USE_MY_LIBS:+1}" ]; then
           export      MCT_LIBDIR=/opt/intelsoft/mpich2/mct/lib
           export  PARPACK_LIBDIR=/opt/intelsoft/mpich2/PARPACK
         elif [ "${which_MPI}" = "openmpi" ]; then
-          export        ESMF_DIR=/gscratch/derakhti/users/ej/DUNEX_01/CODE/ESM
-          export      MCT_INCDIR=/gscratch/derakhti/users/ej/DUNEX_01/CODE/Lib
-          export      MCT_LIBDIR=/gscratch/derakhti/users/ej/DUNEX_01/CODE/Lib
-          export  PARPACK_LIBDIR=/gscratch/derakhti/users/ej/DUNEX_01/CODE/Lib
+          export        ESMF_DIR=/opt/intelsoft/openmpi/esmf
+          export      MCT_INCDIR=/opt/intelsoft/openmpi/mct/include
+          export      MCT_LIBDIR=/opt/intelsoft/openmpi/mct/lib
+          export  PARPACK_LIBDIR=/opt/intelsoft/openmpi/PARPACK
         fi
       fi
 
@@ -338,8 +338,8 @@ if [ -n "${USE_MY_LIBS:+1}" ]; then
             export NETCDF_INCDIR=/opt/intelsoft/openmpi/netcdf4/include
           fi
         else
-          export       NF_CONFIG=/sw/netcdf/fortran-4.4.5_gcc_8.2.1_ompi_3.1.4_parallel_hdf5_1.10.5/bin/nf-config
-          export   NETCDF_INCDIR=/sw/netcdf-fortran+c-4.4.1.1_icc-17/include
+          export       NF_CONFIG=/opt/intelsoft/serial/netcdf4/bin/nf-config
+          export   NETCDF_INCDIR=/opt/intelsoft/serial/netcdf4/include
         fi
       else
         export     NETCDF_INCDIR=/opt/intelsoft/serial/netcdf3/include
@@ -405,7 +405,7 @@ if [ -n "${USE_MY_LIBS:+1}" ]; then
       export           ESMF_COMM=mpich
       export           ESMF_SITE=default
 
-      export       ARPACK_LIBDIR=/gscratch/derakhti/users/ej/DUNEX_01/CODE/Lib/ARPACK
+      export       ARPACK_LIBDIR=/opt/gfortransoft/serial/ARPACK
       if [ -n "${USE_MPI:+1}" ]; then
         if [ "${which_MPI}" = "mpich2" ]; then
           export        ESMF_DIR=/opt/gfortransoft/mpich2/esmf
@@ -413,7 +413,7 @@ if [ -n "${USE_MY_LIBS:+1}" ]; then
           export      MCT_LIBDIR=/opt/gfortransoft/mpich2/mct/lib
           export  PARPACK_LIBDIR=/opt/gfortransoft/mpich2/PARPACK
         elif [ "${which_MPI}" = "openmpi" ]; then
-          export        ESMF_DIR=/gscratch/derakhti/users/ej/DUNEX_01/CODE/ESM
+          export        ESMF_DIR=/opt/gfortransoft/openmpi/esmf
           export      MCT_INCDIR=/opt/gfortransoft/openmpi/mct/include
           export      MCT_LIBDIR=/opt/gfortransoft/openmpi/mct/lib
           export  PARPACK_LIBDIR=/opt/gfortransoft/openmpi/PARPACK
@@ -426,12 +426,12 @@ if [ -n "${USE_MY_LIBS:+1}" ]; then
             export     NF_CONFIG=/opt/gfortransoft/mpich2/netcdf4/bin/nf-config
             export NETCDF_INCDIR=/opt/gfortransoft/mpich2/netcdf4/include
           elif [ "${which_MPI}" = "openmpi" ]; then
-            export     NF_CONFIG=/sw/netcdf/fortran-4.4.5_gcc_8.2.1_ompi_3.1.4_parallel_hdf5_1.10.5/bin/nf-config
-            export NETCDF_INCDIR=/sw/netcdf/fortran-4.4.5_gcc_8.2.1_ompi_3.1.4_parallel_hdf5_1.10.5/bin/include
+            export     NF_CONFIG=/opt/gfortransoft/openmpi/netcdf4/bin/nf-config
+            export NETCDF_INCDIR=/opt/gfortransoft/openmpi/netcdf4/include
           fi
         else
-          export       NF_CONFIG=/sw/netcdf/fortran-4.4.5_gcc_8.2.1_ompi_3.1.4_parallel_hdf5_1.10.5/bin/nf-config
-          export   NETCDF_INCDIR=/sw/netcdf/fortran-4.4.5_gcc_8.2.1_ompi_3.1.4_parallel_hdf5_1.10.5/include
+          export       NF_CONFIG=/opt/gfortransoft/serial/netcdf4/bin/nf-config
+          export   NETCDF_INCDIR=/opt/gfortransoft/serial/netcdf4/include
         fi
       else
         export     NETCDF_INCDIR=/opt/gfortransoft/serial/netcdf3/include
@@ -460,13 +460,13 @@ fi
 # Put the binary to execute in the following directory.
 
 # export            BINDIR=${MY_PROJECT_DIR}
-  export            BINDIR=${MY_PROJECT_DIR}
+  export            BINDIR=./
 
 # Put the f90 files in a project specific Build directory to avoid conflict
 # with other projects.
 
 # export       SCRATCH_DIR=${MY_PROJECT_DIR}/Build
-  export       SCRATCH_DIR=${MY_PROJECT_DIR}/Build
+  export       SCRATCH_DIR=./Build
 
 # Go to the users source directory to compile. The options set above will
 # pick up the application-specific code from the appropriate place.
