@@ -1,2 +1,15 @@
-# Ignore files
+# Ignore data files
 ./data/
+
+# Ignore all slurm files
+slurm*
+
+# ignore build files in swanonly
+build.log
+./swanonly/Build/
+./swanonly/coawstG
+
+# ignore build files in coupled
+./coupled/build.log
+./coupled/Build/
+./coupled/coawstG
