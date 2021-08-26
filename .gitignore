@@ -12,4 +12,4 @@ build.log
 # ignore build files in coupled
 ./coupled/build.log
 ./coupled/Build/
-./coupled/coawstG
+./coupled/coawstM
