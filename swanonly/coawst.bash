@@ -121,7 +121,7 @@ done
 # Set the CPP option defining the particular application. This will
 # determine the name of the ".h" header file with the application
 # CPP definitions. Also this will activate the switch file for WW3.
-export   COAWST_APPLICATION=INLET_TEST
+export   COAWST_APPLICATION=dunex
 
 # Set the ROMS_APPLICATION to be the same as the COAWST_APP.
 # Do not change this. We use the COAWST APP for other checks.
@@ -213,7 +213,7 @@ export   NETCDF_CONFIG=/usr/bin/nf-config
 #export              FORT=gfortran
 #export              FORT=pgi
 
- export         USE_DEBUG=              # use Fortran debugging flags
+ export         USE_DEBUG=on             # use Fortran debugging flags
  export         USE_LARGE=on            # activate 64-bit compilation
  export       USE_NETCDF4=on            # compile with NetCDF-4 library
 #export   USE_PARALLEL_IO=on            # Parallel I/O with Netcdf-4/HDF5
@@ -460,13 +460,13 @@ fi
 # Put the binary to execute in the following directory.
 
 # export            BINDIR=${MY_PROJECT_DIR}
-  export            BINDIR=./
+  export            BINDIR=/gscratch/derakhti/users/ej/dunexCOAWST
 
 # Put the f90 files in a project specific Build directory to avoid conflict
 # with other projects.
 
 # export       SCRATCH_DIR=${MY_PROJECT_DIR}/Build
-  export       SCRATCH_DIR=./Build
+  export       SCRATCH_DIR=/gscratch/derakhti/users/ej/dunexCOAWST/Build
 
 # Go to the users source directory to compile. The options set above will
 # pick up the application-specific code from the appropriate place.

@@ -4,8 +4,8 @@
 #SBATCH --job-name=run-dunex
 
 ## Allocation Defintion 
-#SBATCH --account=derakhti
-#SBATCH --partition=derakhti-gpu
+#SBATCH --account=derakhti-ckpt
+#SBATCH --partition=ckpt
 
 ## Resources
 ## Total number of nodes
@@ -44,4 +44,4 @@ export MCT_LIBDIR=/gscratch/derakhti/shared/MCT/lib
 
 ## Code to be executed
 ## run the coawstM file
-mpirun -np 28 ./coawstM ./swan_dunex.in > coawst_dunex.out
+mpirun -np 28 ./coawstG ./swan_dunex_basic.in > dunex_swanonly.out

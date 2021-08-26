@@ -5,7 +5,7 @@
 slurm*
 
 # ignore build files in swanonly
-build.log
+./swanonly/build.log
 ./swanonly/Build/
 ./swanonly/coawstG
 

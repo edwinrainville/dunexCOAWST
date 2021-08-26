@@ -4,8 +4,8 @@
 #SBATCH --job-name=compile-dunex
 
 ## Allocation Defintion 
-#SBATCH --account=derakhti
-#SBATCH --partition=derakhti-gpu
+#SBATCH --account=derakhti-ckpt
+#SBATCH --partition=ckpt
 
 ## Resources
 ## Total number of nodes
@@ -19,7 +19,7 @@
 #SBATCH --time=00:30:00
 
 ## Memory per node
-#SBATCH --mem=5G
+#SBATCH --mem=50G
 
 ## Turn on email notification 
 ##SBATCH --mail-type=ALL
@@ -35,15 +35,14 @@ module load icc_17-ompi_2.0.2
 module list
 
 ## Set Environment Variables
-export NETCDF_INCDIR=/sw/netcdf-fortran+c-4.4.1.1_icc-17/include
-export NETCDF_LIBDIR=/sw/netcdf-fortran+c-4.4.1.1_icc-17/lib
-export NETCDF=/sw/netcdf-fortran+c-4.4.1.1_icc-17
-export NETCDF_CONFIG=/sw/netcdf-fortran+c-4.4.1.1_icc-17/bin/nc-config
-export MCT_INCDIR=/gscratch/derakhti/shared/MCT/include
-export MCT_LIBDIR=/gscratch/derakhti/shared/MCT/lib
+## export NETCDF_INCDIR=/sw/netcdf-fortran+c-4.4.1.1_icc-17/include
+## export NETCDF_LIBDIR=/sw/netcdf-fortran+c-4.4.1.1_icc-17/lib
+## export NETCDF=/sw/netcdf-fortran+c-4.4.1.1_icc-17
+## export NETCDF_CONFIG=/sw/netcdf-fortran+c-4.4.1.1_icc-17/bin/nc-config
+## export MCT_INCDIR=/gscratch/derakhti/shared/MCT/include
+## export MCT_LIBDIR=/gscratch/derakhti/shared/MCT/lib
 
-## Code to be executed
 ## Compile the coawst application
-/gscratch/derakhti/users/ej/dunex_swan/RUNFILES/coawst.bash > ./build.log
+/gscratch/derakhti/users/ej/dunexCOAWST/swanonly/coawst.bash > ./build.log
 echo "done"
 exit
