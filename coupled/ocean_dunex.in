@@ -73,7 +73,7 @@
 ! Input variable information file name.  This file needs to be processed
 ! first so all information arrays can be initialized properly.
 
-     VARNAME = /gscratch/derakhti/src/COAWST/ROMS/External/varinfo.dat
+     VARNAME = /gscratch/derakhti/users/ej/COAWST/ROMS/External/varinfo.dat
 
 ! Number of nested grids.
 
@@ -1136,10 +1136,10 @@ Dout(iTvdif) == F F     ! temp_vdiff, ...    vertical diffusion
 
 ! Input ASCII parameter filenames.
 
-     APARNAM =  /gscratch/derakhti/src/COAWST/ROMS/External/s4dvar.in
-     FPOSNAM =  /gscratch/derakhti/src/COAWST/ROMS/External/floats.in
-     BPARNAM =  /gscratch/derakhti/src/COAWST/ROMS/External/bioFasham.in
-     USRNAME =  /gscratch/derakhti/src/COAWST/ROMS/External/MyFile.dat
+     APARNAM =  /gscratch/derakhti/users/ej/COAWST/ROMS/External/s4dvar.in
+     FPOSNAM =  /gscratch/derakhti/users/ej/COAWST/ROMS/External/floats.in
+     BPARNAM =  /gscratch/derakhti/users/ej/COAWST/ROMS/External/bioFasham.in
+     USRNAME =  /gscratch/derakhti/users/ej/COAWST/ROMS/External/MyFile.dat
 
 !
 !  GLOSSARY:

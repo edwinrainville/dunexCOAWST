@@ -44,6 +44,7 @@
 #undef  AVERAGES
 #undef  AVERAGES_WEC
 
+#define ANA_INITIAL
 #define ANA_FSOBC
 #define ANA_M2OBC
 #define ANA_SMFLUX
@@ -53,11 +54,11 @@
 #define ANA_BTFLUX
 #define ANA_BSFLUX
 #define ANA_SPFLUX
-#define ANA_SRFLUX
-#define ANA_INITIAL 
+#define ANA_SRFLUX 
 
 #define SSW_BBL
 #ifdef SSW_BBL
+# define ANA_SEDMIENT
 # define SSW_CALC_ZNOT
 # define SSW_LOGINT 
 # define SSW_LOGINT_STOKES 
